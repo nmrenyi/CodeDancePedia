@@ -1,0 +1,10 @@
+[run]
+omit =
+    manage.py
+    */tests.py
+    */test_*.py
+    */*_test.py
+    mrc_model/*
+    manage_doc/views/views_search.py
+    */migrations/*
+    tests/*

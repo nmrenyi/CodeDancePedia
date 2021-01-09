@@ -1,0 +1,46 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.idea/
+.vscode/
+
+# Unittest / Coverage report
+.coverage
+.pytest_cache/
+coverage-reports/
+xunit-reports/
+
+**/.DS_Store
+*.sqlite3
+
+mrc_model/*
+!mrc_model/rpc_client.py
+!mrc_model/rpc_time_test.py
+!mrc_model/total_time_test.py
+!mrc_model/run_heatmap.py
+!mrc_model/doc_example
+.vscode
+/ES_Evaluation/cmrc_raw/
+/ES_Evaluation/cmrc_reformatted/
+/ES_Evaluation/cmrc_json/
+/ES_Evaluation/process_data/process_fixture.py
+
+.sh
+
+/ES_Evaluation/DuReader_raw/
+/ES_Evaluation/DuReader_reformatted/
+/remote_configuration/
+
+ES_Evaluation/VisualizeResult/DuReader/
+ES_Evaluation/VisualizeResult/cmrc/

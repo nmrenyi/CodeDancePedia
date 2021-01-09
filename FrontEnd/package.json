@@ -1,0 +1,99 @@
+{
+    "name": "codedancepedia",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve --port 8080",
+        "build": "vue-cli-service build",
+        "test:unit": "vue-cli-service test:unit",
+        "lint": "vue-cli-service lint",
+        "help": "vue-cli-service help",
+        "test": "jest --silent=false --watchAll=false --verbose false"
+    },
+    "dependencies": {
+        "axios": "^0.20.0",
+        "core-js": "^3.6.5",
+        "element-ui": "^2.13.2",
+        "mock": "^0.1.1",
+        "mockjs": "^1.1.0",
+        "prometheus-client": "^0.1.1",
+        "three": "^0.121.1",
+        "vue": "^2.6.11",
+        "vue-cookies": "^1.7.4",
+        "vue-router": "^3.4.5"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.5.0",
+        "@vue/cli-plugin-eslint": "~4.5.0",
+        "@vue/cli-plugin-unit-jest": "^4.5.7",
+        "@vue/cli-service": "~4.5.0",
+        "@vue/test-utils": "^1.1.0",
+        "babel-eslint": "^10.1.0",
+        "babel-jest": "^26.5.2",
+        "eslint": "^6.7.2",
+        "eslint-plugin-vue": "^6.2.2",
+        "jest": "^26.6.0",
+        "jest-serializer-vue": "^2.0.2",
+        "vue-jest": "^3.0.7",
+        "vue-template-compiler": "^2.6.11"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true,
+            "jquery": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "parserOptions": {
+            "parser": "babel-eslint"
+        },
+        "rules": {
+            "max-len": [
+                1,
+                {
+                    "code": 100
+                }
+            ],
+            "no-console": 0
+        },
+        "overrides": [{
+            "files": [
+                "**/__tests__/*.{j,t}s?(x)",
+                "**/tests/unit/**/*.spec.{j,t}s?(x)"
+            ],
+            "env": {
+                "jest": true
+            }
+        }]
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ],
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "vue"
+        ],
+        "moduleNameMapper": {
+            "^@/(.*)$": "<rootDir>/src/$1"
+        },
+        "transform": {
+            "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+            ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+        },
+        "snapshotSerializers": [
+            "<rootDir>/node_modules/jest-serializer-vue"
+        ],
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "**/*.{js,vue}",
+            "!**/node_modules/**"
+        ],
+        "preset": "@vue/cli-plugin-unit-jest"
+    }
+}

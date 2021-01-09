@@ -1,0 +1,56 @@
+image: registry.secoder.net/tool/deployer
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - export BUILD_IMAGE_NAME=$CI_REGISTRY_IMAGE
+    - export BUILD_IMAGE_TAG=$CI_COMMIT_REF_SLUG
+    - export BUILD_IMAGE_USERNAME=$CI_REGISTRY_USER
+    - export BUILD_IMAGE_PASSWORD=$CI_REGISTRY_PASSWORD
+    - deployer build
+
+# Job template for test stage
+.test:
+  image: python:3.8
+  stage: test
+
+  before_script:
+    - python -V  # Print out python version for debugging
+    # Uncomment next line if your Django app needs a JS runtime:
+    # - apt-get update -q && apt-get install nodejs -yqq
+    - pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements_dev.txt
+
+
+unit-test:
+  extends: .test
+  script:
+    - coverage run -m pytest --junit-xml=xunit-reports/xunit-result.xml
+    - BACKEND_RET=$?  # return value of the previous command
+    - coverage xml -o coverage-reports/coverage.xml
+    - coverage report -m
+    - exit $BACKEND_RET
+  after_script:
+    - SUFFIX=$RANDOM
+    - curl "http://10.0.0.11/sonar-scanner.tar.gz" -s -o "/tmp/sonar-$SUFFIX.tar.gz"
+    - tar -xf "/tmp/sonar-$SUFFIX.tar.gz" -C /opt
+    - /opt/sonar-scanner/bin/sonar-scanner
+
+style-test:
+  extends: .test
+  allow_failure: false
+  script:
+    - pylint --load-plugins=pylint_django back_end manage_doc manage_user mrc_model tests ES_Evaluation ip_manager # the folders for code style check
+    - BACKEND_RET=$?
+    - exit $BACKEND_RET
+
+deploy:
+  stage: deploy
+  script:
+    - deployer dyno replace $CI_PROJECT_NAME "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" "$REGISTRY_USER" "$REGISTRY_PWD"
+  only:
+    - master

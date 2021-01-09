@@ -1,0 +1,3 @@
+[dev]
+disable=too-many-return-statements, W0613, W0621, C0103, bad-continuation, too-few-public-methods, no-self-use, wildcard-import
+

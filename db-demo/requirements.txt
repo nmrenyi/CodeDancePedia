@@ -1,0 +1,14 @@
+Django==3.0.7
+django_elasticsearch_dsl==7.1.4
+django-cors-headers
+pandas
+prometheus-client==0.7.1
+elasticsearch~=7.9.1
+tqdm
+numpy
+pandas
+seaborn
+matplotlib
+gunicorn
+pymysql
+requests
